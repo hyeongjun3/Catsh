@@ -8,7 +8,8 @@
     "paths": {
       "@Assets/*": ["./src/assets/*"],
       "@Components/*": ["./src/components/*"],
-      "@Pages/*": ["./src/pages/*"]
+      "@Pages/*": ["./src/pages/*"],
+      "@Utils/*": ["./src/utils/*"]
     },
 
     /* Bundler mode */

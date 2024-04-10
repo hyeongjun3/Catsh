@@ -131,3 +131,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+div,
+button {
+  box-sizing: border-box;
+}
+
+/* font family */
+@font-face {
+  font-family: "Y Clover";
+  font-weight: 400;
+  src: url("@Assets/fonts/YClover-Regular.eot"),
+    url("@Assets/fonts/YClover-Regular.woff"),
+    url("@Assets/fonts/YClover-Regular.woff2");
+}
+
+@font-face {
+  font-family: "Y Clover";
+  font-weight: 700;
+  src: url("@Assets/fonts/YClover-Bold.eot"),
+    url("@Assets/fonts/YClover-Bold.woff"),
+    url("@Assets/fonts/YClover-Bold.woff2");
+}
