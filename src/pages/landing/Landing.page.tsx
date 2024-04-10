@@ -4,6 +4,12 @@ import { createRepeatBackground } from "@Utils/styleExtension";
 import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
+  const navigate = useNavigate();
+
+  const goNext = () => {
+    navigate("choose");
+  };
+
   return (
     <div className="flex flex-col h-full">
       <div className="h-full px-[16px] flex w-full justify-between gap-[9px]">
@@ -12,7 +18,11 @@ export default function LandingPage() {
         <MovieSide />
       </div>
       <div className="pt-[28px] pb-[32px]  flex items-center justify-center">
-        <Button variant="primary" className="w-[324px] h-[56px]">
+        <Button
+          variant="primary"
+          className="w-[324px] h-[56px]"
+          onClick={goNext}
+        >
           시작해보자냥
         </Button>
       </div>
@@ -25,7 +35,13 @@ function MovieSide() {
     <div
       className="min-w-[32px] h-full"
       style={{
-        backgroundImage: createRepeatBackground(Base64.rectange, 32, 24, 28),
+        backgroundImage: createRepeatBackground(
+          Base64.rectange,
+          32,
+          24,
+          28,
+          "col"
+        ),
         backgroundRepeat: "repeat-y",
         backgroundPositionY: "-15px",
       }}

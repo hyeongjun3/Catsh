@@ -8,6 +8,11 @@ export default {
     fontFamily: {
       yClover: ['"Y Clover"'],
     },
+    backgroundColor: {
+      test: "white",
+      test2: "blue",
+      test3: "green",
+    },
     backgroundImage: {
       "movie-side": "url('@Assets/images/movie-side.png')",
     },
