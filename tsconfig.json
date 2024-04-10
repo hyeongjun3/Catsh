@@ -8,6 +8,7 @@
     "paths": {
       "@Assets/*": ["./src/assets/*"],
       "@Components/*": ["./src/components/*"],
+      "@Constant/*": ["./src/constant/*"],
       "@Pages/*": ["./src/pages/*"],
       "@Utils/*": ["./src/utils/*"]
     },
