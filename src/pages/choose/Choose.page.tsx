@@ -1,10 +1,8 @@
 import Card, { CardProps } from "@Components/Card/Card";
 import Base64 from "@Constant/base64";
 import { createRepeatBackground, mergeClassName } from "@Utils/styleExtension";
-import SampleImage1 from "@Assets/images/sample-image1.png";
-import SampleImage2 from "@Assets/images/sample-image2.png";
-import SampleImage3 from "@Assets/images/sample-image3.png";
-import SampleImage4 from "@Assets/images/sample-image4.png";
+import { useNavigate } from "react-router-dom";
+import Templates from "@Constant/templates";
 
 export default function ChoosePage() {
   return (
@@ -78,43 +76,35 @@ function Middle() {
 }
 
 function Content() {
+  const navigate = useNavigate();
+
+  const goNext = (templateId: string) => {
+    navigate(`/prepare/${templateId}`);
+  };
+
   const items: [CardProps[], CardProps[]] = [
     [
       {
-        label: "생일 축하",
-        description: "템플릿이름 길이가 길어질 경우 2줄",
-        src: SampleImage1,
+        ...Templates["id1"],
+        onClick: () => goNext("id1"),
       },
       {
-        label: "생일 축하",
-        description: "템플릿 이름",
-        src: SampleImage3,
-        disabled: true,
+        ...Templates["id3"],
       },
       {
-        label: "생일 축하",
-        description: "템플릿이름 길이가 길어질 경우 2줄",
-        src: SampleImage4,
-        disabled: true,
+        ...Templates["id4"],
       },
     ],
     [
       {
-        label: "인절미",
-        description: "템플릿 이름",
-        src: SampleImage2,
+        ...Templates["id2"],
+        onClick: () => goNext("id2"),
       },
       {
-        label: "키치",
-        description: "템플릿 이름",
-        src: SampleImage4,
-        disabled: true,
+        ...Templates["id4"],
       },
       {
-        label: "인절미",
-        description: "템플릿 이름",
-        src: SampleImage2,
-        disabled: true,
+        ...Templates["id2"],
       },
     ],
   ];

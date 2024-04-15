@@ -3,13 +3,13 @@ import { ComponentProps } from "react";
 
 export interface CardProps extends ComponentProps<"button"> {
   label: string;
-  description: string;
+  title: string;
   src: string;
 }
 
 export default function Card({
   label,
-  description,
+  title,
   className,
   src,
   ...restProps
@@ -30,7 +30,7 @@ export default function Card({
           {label}
         </div>
         <div className="font-yClover font-bold text-white leading-5">
-          {description}
+          {title}
         </div>
       </div>
       {disabled && (

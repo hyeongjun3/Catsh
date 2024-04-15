@@ -1,5 +1,6 @@
 import ChoosePage from "@Pages/choose/Choose.page";
 import LandingPage from "@Pages/landing/Landing.page";
+import PreparePage from "@Pages/prepare/Prepare.page";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 export default function Router() {
@@ -10,6 +11,7 @@ export default function Router() {
       children: [
         { path: "/", element: <LandingPage /> },
         { path: "/choose", element: <ChoosePage /> },
+        { path: "/prepare/:templateId", element: <PreparePage /> },
       ],
     },
   ]);
