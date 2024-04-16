@@ -1,6 +1,7 @@
 import ChoosePage from "@Pages/choose/Choose.page";
 import LandingPage from "@Pages/landing/Landing.page";
 import PreparePage from "@Pages/prepare/Prepare.page";
+import ShootingPage from "@Pages/shooting/Shooting.page";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 export default function Router() {
@@ -12,6 +13,7 @@ export default function Router() {
         { path: "/", element: <LandingPage /> },
         { path: "/choose", element: <ChoosePage /> },
         { path: "/prepare/:templateId", element: <PreparePage /> },
+        { path: "/shooting/:templateId", element: <ShootingPage /> },
       ],
     },
   ]);

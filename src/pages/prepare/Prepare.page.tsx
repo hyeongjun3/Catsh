@@ -14,6 +14,7 @@ export default function PreparePage() {
   }
 
   const goBack = () => navigate(-1);
+  const goShooting = () => navigate(`/shooting/${templateId}`);
 
   const { label, title, description, src } = templateInfo;
 
@@ -54,7 +55,7 @@ export default function PreparePage() {
         </div>
       </div>
       <div className="flex flex-row items-center pt-[52px] pb-[40px] px-[16px] gap-[16px] justify-center">
-        <Button className="w-full" variant={"primary"}>
+        <Button className="w-full" variant={"primary"} onClick={goShooting}>
           직접 촬영할래
         </Button>
         <Button className="w-full" variant={"primary"}>
