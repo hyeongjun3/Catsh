@@ -16,11 +16,9 @@ export default function LandingPage() {
         <MovieSide />
         <Center />
         <MovieSide />
-      </div>
-      <div className="pt-[28px] pb-[32px]  flex items-center justify-center">
         <Button
           variant="primary"
-          className="w-[324px] h-[56px]"
+          className="absolute w-[324px] h-[56px] bottom-[32px] left-0 right-0 m-auto"
           onClick={goNext}
         >
           시작해보자냥
