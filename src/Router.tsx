@@ -23,8 +23,11 @@ export default function Router() {
 
 function MobileLayout() {
   return (
-    <div className="w-screen bg-white h-screen flex justify-center">
-      <section className="w-[500px] h-full bg-[#1A1A1A] overflow-auto">
+    <div className="w-screen bg-white h-dvh flex justify-center">
+      <section
+        id="mobile-layout"
+        className="w-[500px] h-full bg-[#1A1A1A] overflow-auto"
+      >
         <Outlet />
       </section>
     </div>
