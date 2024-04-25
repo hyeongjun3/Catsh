@@ -1,7 +1,11 @@
-import { Easing } from "framer-motion";
 import { useState } from "react";
 import { ObjectFilter, hasOwn } from "@Utils/objectExtension";
-import MotionJson from "@Assets/motion/motion.json";
+import {
+  MotionJsonValue,
+  Options,
+  To,
+  getMotionJson,
+} from "@Utils/motionManager";
 
 export interface UseMotionProps {
   id: string;
@@ -9,9 +13,11 @@ export interface UseMotionProps {
 
 export default function useMotion({ id }: UseMotionProps) {
   const [animationInfo] = useState(() => {
-    if (!hasOwn(MotionJson, id)) return null;
+    const motionJson = getMotionJson();
+
+    if (!hasOwn(motionJson, id)) return null;
     // @ts-ignore
-    return convert(MotionJson[id]);
+    return convert(motionJson[id]);
   });
 
   if (animationInfo === null) {
@@ -19,33 +25,6 @@ export default function useMotion({ id }: UseMotionProps) {
   }
 
   return animationInfo;
-}
-
-interface ToOptions {
-  x?: number | string;
-  y?: number | string;
-  rotate?: number | string;
-  opacity?: number;
-  ease?: Easing;
-}
-
-interface MotionJsonValue {
-  to: ToOptions[];
-  delay: number;
-  duration: number;
-}
-
-interface To {
-  x: (number | string)[];
-  y: (number | string)[];
-  rotate: (number | string)[];
-  opacity: number[];
-}
-
-interface Options {
-  duration: number;
-  delay: number;
-  ease: Easing[];
 }
 
 function convert(info: MotionJsonValue) {
