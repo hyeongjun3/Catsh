@@ -27,20 +27,31 @@ export function ObjectClean(obj: object) {
         return acc;
       }
 
+      if (typeof newItem === "string") {
+        const iNewItem = newItem * 1;
+        if (!isNaN(iNewItem)) {
+          return [...acc, newItem];
+        }
+      }
+
       return [...acc, newItem];
     }, []);
   }
 
   return Object.keys(obj).reduce((acc, key) => {
-    // @ts-ignore
-    if (typeof obj[key] === "object") {
-      // @ts-ignore
-      acc[key] = ObjectClean(obj[key]);
-      // @ts-ignore
-    } else if (typeof key === "string" && obj[key].length !== 0) {
-      // @ts-ignore
-      acc[key] = obj[key];
+    const newItem = obj[key];
+
+    if (typeof newItem === "object") {
+      acc[key] = ObjectClean(newItem);
+    } else if (typeof key === "string" && newItem.length !== 0) {
+      const iNewItem = newItem * 1;
+      if (!isNaN(iNewItem)) {
+        acc[key] = iNewItem;
+      } else {
+        acc[key] = newItem;
+      }
     }
+
     return acc;
   }, {});
 }
