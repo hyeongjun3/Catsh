@@ -17,6 +17,9 @@ import {
 import { ObjectClean } from "@Utils/objectExtension";
 import { setLocalStorage } from "@Utils/storageExtension";
 import { STORAGE_KEYS } from "@Constant/storageKeys";
+import MotionJson from "@Assets/motion/motion.json";
+import { download } from "@Utils/download";
+import getCurrentDate from "@Utils/dateExtension";
 
 interface CheatLayoutProps {
   children: ReactNode;
@@ -58,39 +61,43 @@ function MotionSettingModal({ isOpen, onClose }: MotionSettingModalProps) {
   const motionJson = getMotionJson();
   const form = useForm({ defaultValues: motionJson });
 
-  const onSubmit = (data: typeof motionJson) => {
-    console.log(data);
-    console.log(ObjectClean(data));
+  const store = (data: typeof motionJson) => {
     setLocalStorage(STORAGE_KEYS.motion, ObjectClean(data));
   };
 
-  const reset = () => form.reset(motionJson);
+  const exportJson = (data: typeof motionJson) => {
+    download(`${getCurrentDate()}.json`, JSON.stringify(ObjectClean(data)));
+  };
+
+  const reset = () => form.reset(MotionJson);
 
   if (!isOpen) return <></>;
   return (
     <>
       {createPortal(
         <FormProvider {...form}>
-          <form
-            className="absolute bg-[rgb(209,213,219)] top-1 flex w-[calc(100%-16px)] left-0 right-0 m-auto py-4 px-2 rounded-lg flex-col gap-2 z-10"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
+          <div className="absolute bg-[rgb(209,213,219)] top-1 flex w-[calc(100%-16px)] left-0 right-0 m-auto py-4 px-2 rounded-lg flex-col gap-2 z-10">
             <div className="flex justify-between w-full items-center">
               <p className="font-yClover text-base font-bold">모션 설정</p>
               <div className="flex gap-2">
-                <Button variant={"primary"} type="submit">
+                <Button variant={"primary"} onClick={form.handleSubmit(store)}>
                   저장
                 </Button>
                 <Button variant={"primary"} onClick={reset}>
                   초기화
                 </Button>
-                <Button variant={"primary"}>내보내기</Button>
+                <Button
+                  variant={"primary"}
+                  onClick={form.handleSubmit(exportJson)}
+                >
+                  내보내기
+                </Button>
                 <Button variant={"primary"} onClick={onClose}>
                   닫기
                 </Button>
               </div>
             </div>
-            <div className="flex flex-col h-[500px] overflow-auto gap-1">
+            <form className="flex flex-col h-[500px] overflow-auto gap-1">
               {Object.entries(motionJson).map(([key, value]) => {
                 return (
                   <SettingArea
@@ -100,8 +107,8 @@ function MotionSettingModal({ isOpen, onClose }: MotionSettingModalProps) {
                   />
                 );
               })}
-            </div>
-          </form>
+            </form>
+          </div>
         </FormProvider>,
         document.body
       )}
