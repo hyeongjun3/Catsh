@@ -1,0 +1,27 @@
+{
+  "landingpage-content": {
+    "to": [{ "y": 0, "ease": "circIn" }, { "y": "-100%" }],
+    "delay": 0,
+    "duration": 2
+  },
+  "landingpage-cathand": {
+    "to": [
+      { "x": 100, "y": 250, "rotate": 0, "opacity": 0, "ease": "easeIn" },
+      { "x": -100, "y": 200, "rotate": 45, "opacity": 1, "ease": "easeOut" },
+      { "x": 100, "y": 160, "rotate": 0, "opacity": 0, "ease": "backInOut" },
+      { "x": -100, "y": 250, "rotate": 45, "opacity": 1 }
+    ],
+    "delay": 0,
+    "duration": 0.3
+  },
+  "landingpage-button": {
+    "to": [{ "opacity": 1 }, { "opacity": 0 }],
+    "delay": 0,
+    "duration": 2
+  },
+  "choosepage-content": {
+    "to": [{ "y": "100%", "ease": "easeIn" }, { "y": 0 }],
+    "duration": 1,
+    "delay": 1
+  }
+}

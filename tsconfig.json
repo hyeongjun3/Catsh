@@ -9,6 +9,7 @@
       "@Assets/*": ["./src/assets/*"],
       "@Components/*": ["./src/components/*"],
       "@Constant/*": ["./src/constant/*"],
+      "@Hooks/*": ["./src/hooks/*"],
       "@Pages/*": ["./src/pages/*"],
       "@Utils/*": ["./src/utils/*"]
     },

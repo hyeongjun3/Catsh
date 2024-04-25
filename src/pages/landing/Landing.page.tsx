@@ -5,11 +5,16 @@ import { motion, useAnimate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import CatHandImage from "@Assets/images/cat4.png";
 import { useState } from "react";
+import useMotion from "@Hooks/useMotion";
 
 export default function LandingPage() {
   const navigate = useNavigate();
   const [scope, animate] = useAnimate();
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const motionContent = useMotion({ id: "landingpage-content" });
+  const motionButton = useMotion({ id: "landingpage-button" });
+  const motionCathand = useMotion({ id: "landingpage-cathand" });
 
   const goNext = () => navigate("/choose");
 
@@ -17,16 +22,7 @@ export default function LandingPage() {
     if (isPlaying) return;
 
     setIsPlaying(true);
-    animate(
-      scope.current,
-      {
-        x: [100, -100, 100, -100],
-        y: [250, 200, 160, 250],
-        rotate: [0, 0, 0, 0],
-        opacity: [0, 1, 0, 1],
-      },
-      { duration: 0.3, ease: ["easeIn", "easeOut", "easeOut", "easeOut"] }
-    ).then(() => {
+    animate(scope.current, motionCathand.to, motionCathand.options).then(() => {
       goNext();
     });
   };
@@ -35,8 +31,8 @@ export default function LandingPage() {
     <>
       <motion.div
         className="flex flex-col h-full overflow-hidden absolute w-full"
-        exit={{ y: [0, "-100%"] }}
-        transition={{ duration: 3 }}
+        exit={motionContent.to}
+        transition={motionContent.options}
       >
         <div className="h-full relative px-[16px] flex w-full justify-between gap-[9px]">
           <MovieSide />
@@ -50,7 +46,7 @@ export default function LandingPage() {
           </div>
         </div>
       </motion.div>
-      <motion.div exit={{ opacity: [1, 0] }} transition={{ duration: 2 }}>
+      <motion.div exit={motionButton.to} transition={motionButton.options}>
         <Button
           variant="primary"
           className="absolute w-[calc(100%-32px)] h-[56px] bottom-[32px] left-0 right-0 m-auto"

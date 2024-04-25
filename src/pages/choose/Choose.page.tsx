@@ -4,14 +4,17 @@ import { createRepeatBackground, mergeClassName } from "@Utils/styleExtension";
 import { useNavigate } from "react-router-dom";
 import Templates from "@Constant/templates";
 import { motion } from "framer-motion";
+import useMotion from "@Hooks/useMotion";
 
 export default function ChoosePage() {
+  const motionContent = useMotion({ id: "choosepage-content" });
+
   return (
     <motion.div
       className="flex flex-col h-full absolute"
       initial={{ y: "100%" }}
-      animate={{ y: ["50%", 0] }}
-      transition={{ duration: 3, delay: 1, easings: ["easeIn", "easeInOut"] }}
+      animate={motionContent.to}
+      transition={motionContent.options}
     >
       <Top />
       <div className="flex flex-col px-[24px] overflow-y-auto gap-[32px]">
