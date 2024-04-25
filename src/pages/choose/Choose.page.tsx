@@ -3,16 +3,22 @@ import Base64 from "@Constant/base64";
 import { createRepeatBackground, mergeClassName } from "@Utils/styleExtension";
 import { useNavigate } from "react-router-dom";
 import Templates from "@Constant/templates";
+import { motion } from "framer-motion";
 
 export default function ChoosePage() {
   return (
-    <div className="flex flex-col h-full">
+    <motion.div
+      className="flex flex-col h-full absolute"
+      initial={{ y: "100%" }}
+      animate={{ y: ["50%", 0] }}
+      transition={{ duration: 3, delay: 1, easings: ["easeIn", "easeInOut"] }}
+    >
       <Top />
       <div className="flex flex-col px-[24px] overflow-y-auto gap-[32px]">
         <Middle />
         <Content />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

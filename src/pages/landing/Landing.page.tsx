@@ -1,30 +1,65 @@
 import Button from "@Components/button/Button";
 import Base64 from "@Constant/base64";
 import { createRepeatBackground } from "@Utils/styleExtension";
+import { motion, useAnimate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import CatHandImage from "@Assets/images/cat4.png";
+import { useState } from "react";
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [scope, animate] = useAnimate();
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const goNext = () => {
-    navigate("choose");
+  const goNext = () => navigate("/choose");
+
+  const playAnimation = () => {
+    if (isPlaying) return;
+
+    setIsPlaying(true);
+    animate(
+      scope.current,
+      {
+        x: [100, -100, 100, -100],
+        y: [250, 200, 160, 250],
+        rotate: [0, 0, 0, 0],
+        opacity: [0, 1, 0, 1],
+      },
+      { duration: 0.3, ease: ["easeIn", "easeOut", "easeOut", "easeOut"] }
+    ).then(() => {
+      goNext();
+    });
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="h-full px-[16px] flex w-full justify-between gap-[9px]">
-        <MovieSide />
-        <Center />
-        <MovieSide />
+    <>
+      <motion.div
+        className="flex flex-col h-full overflow-hidden absolute w-full"
+        exit={{ y: [0, "-100%"] }}
+        transition={{ duration: 3 }}
+      >
+        <div className="h-full relative px-[16px] flex w-full justify-between gap-[9px]">
+          <MovieSide />
+          <Center />
+          <MovieSide />
+          <div
+            className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
+            ref={scope}
+          >
+            <CatHand />
+          </div>
+        </div>
+      </motion.div>
+      <motion.div exit={{ opacity: [1, 0] }} transition={{ duration: 2 }}>
         <Button
           variant="primary"
-          className="absolute w-[324px] h-[56px] bottom-[32px] left-0 right-0 m-auto"
-          onClick={goNext}
+          className="absolute w-[calc(100%-32px)] h-[56px] bottom-[32px] left-0 right-0 m-auto"
+          onClick={playAnimation}
         >
           시작해보자냥
         </Button>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 }
 
@@ -73,4 +108,8 @@ function CatBackground() {
       고양이 이미지 ㅜㅜ
     </div>
   );
+}
+
+function CatHand() {
+  return <img src={CatHandImage} />;
 }
