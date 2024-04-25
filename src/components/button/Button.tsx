@@ -9,6 +9,7 @@ interface ButtonProps extends ComponentProps<"button"> {
 export default function Button({
   variant,
   className,
+  type = "button",
   ...restprops
 }: ButtonProps) {
   const getBoxStyle = () => {
@@ -41,6 +42,7 @@ export default function Button({
         getTypo(),
         className
       )}
+      type={type}
       {...restprops}
     />
   );

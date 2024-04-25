@@ -1,7 +1,12 @@
+import CheatLayout from "@Components/layout/CheatLayout";
 import Router from "./Router";
 
 function App() {
-  return <Router />;
+  return (
+    <CheatLayout>
+      <Router />
+    </CheatLayout>
+  );
 }
 
 export default App;
