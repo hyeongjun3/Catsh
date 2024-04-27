@@ -1,17 +1,21 @@
-import Card, { CardProps } from "@Components/Card/Card";
+import Card from "@Components/Card/Card";
 import Base64 from "@Constant/base64";
 import { createRepeatBackground, mergeClassName } from "@Utils/styleExtension";
 import { useNavigate } from "react-router-dom";
-import Templates from "@Constant/templates";
 import { motion } from "framer-motion";
 import useMotion from "@Hooks/useMotion";
+import CatImage2 from "@Assets/images/cat2.png";
+import { TemplateType, getTemplate } from "@Utils/templateManager";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@Constant/queryKeys";
+import lodash from "lodash";
 
 export default function ChoosePage() {
   const motionContent = useMotion({ id: "choosepage-content" });
 
   return (
     <motion.div
-      className="flex flex-col h-full absolute"
+      className="flex flex-col w-full h-full absolute"
       initial={{ y: "100%" }}
       animate={motionContent.to}
       transition={motionContent.options}
@@ -73,8 +77,8 @@ function IconMenu() {
 function Middle() {
   return (
     <div className="mt-[16px] flex flex-row gap-[24px]">
-      <div className="w-[80px] h-[80px] rounded-full bg-[#DAD9D9]">
-        <img />
+      <div className="w-[80px] h-[80px] rounded-full bg-[#DAD9D9] overflow-hidden">
+        <img src={CatImage2} className="scale-[1.3]" />
       </div>
       <div className="flex flex-col justify-center gap-[8px] font-yClover font-bold text-[#FCD55F]">
         <span className="text-[24px]">@ catsch</span>
@@ -86,49 +90,53 @@ function Middle() {
 
 function Content() {
   const navigate = useNavigate();
+  const templateQuery = useQuery({
+    queryKey: [QUERY_KEYS.template],
+    queryFn: getTemplate,
+  });
+
+  // HJ TODO: loading에 기능...
+  if (templateQuery.status === "pending") {
+    return <div>loading</div>;
+  }
+
+  if (templateQuery.status === "error") {
+    return <div>error</div>;
+  }
+
+  const originTemplates = templateQuery.data;
+  const separatedTemplates: [TemplateType[], TemplateType[]] = [[], []];
+  originTemplates.forEach((template, idx) => {
+    if (idx % 2 === 0) separatedTemplates[0].push(template);
+    else separatedTemplates[1].push(template);
+  });
 
   const goNext = (templateId: string) => {
     navigate(`/prepare/${templateId}`);
   };
 
-  const items: [CardProps[], CardProps[]] = [
-    [
-      {
-        ...Templates["id1"],
-        onClick: () => goNext("id1"),
-      },
-      {
-        ...Templates["id3"],
-      },
-      {
-        ...Templates["id4"],
-      },
-    ],
-    [
-      {
-        ...Templates["id2"],
-        onClick: () => goNext("id2"),
-      },
-      {
-        ...Templates["id4"],
-      },
-      {
-        ...Templates["id2"],
-      },
-    ],
-  ];
-
   return (
     <div className="flex flex-row gap-[8px]">
-      {items.map((item, idx) => {
+      {separatedTemplates.map((templates, idx) => {
         const margin = idx === 1 ? "mt-[88px]" : "";
         return (
           <div
             key={idx}
             className={mergeClassName("flex flex-col gap-[8px] w-full", margin)}
           >
-            {item.map((props, idx2) => {
-              return <Card key={idx2} {...props} />;
+            {templates.map((template) => {
+              return (
+                <Card
+                  key={template.id}
+                  {...lodash.pick(template, [
+                    "thumbnailSrc",
+                    "id",
+                    "title",
+                    "state",
+                  ])}
+                  onClick={() => goNext(template.id)}
+                />
+              );
             })}
           </div>
         );

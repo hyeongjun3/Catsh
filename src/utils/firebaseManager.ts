@@ -1,5 +1,13 @@
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
-import { FirebaseStorage, getBlob, getStorage, ref } from "firebase/storage";
+import {
+  FirebaseStorage,
+  getBlob,
+  getDownloadURL,
+  getStorage,
+  ref,
+} from "firebase/storage";
+
+type ContentType = "json" | "blob";
 
 class FirebaseManager {
   private static m_instance: FirebaseManager;
@@ -29,9 +37,22 @@ class FirebaseManager {
     this.m_storage.maxOperationRetryTime = 0;
   }
 
-  public getFile(src: string) {
+  public async getFile(src: string, type: ContentType) {
     const reference = ref(this.m_storage, src);
+
+    const blob = await getBlob(reference);
+
+    if (type === "json") {
+      const text = await blob.text();
+      return JSON.parse(text);
+    }
     return getBlob(reference);
+  }
+
+  public async getUrl(src: string) {
+    const reference = ref(this.m_storage, src);
+
+    return getDownloadURL(reference);
   }
 }
 
