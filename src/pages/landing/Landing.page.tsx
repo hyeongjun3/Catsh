@@ -42,21 +42,25 @@ export default function LandingPage() {
           <MovieSide />
         </div>
       </motion.div>
-      <motion.div exit={motionButton.to} transition={motionButton.options}>
+      <motion.div
+        exit={motionButton.to}
+        transition={motionButton.options}
+        className="absolute flex w-full bottom-[32px] left-0 right-0 m-auto justify-center"
+      >
         <Button
           variant="primary"
-          className="absolute w-[calc(100%-32px)] h-[56px] bottom-[32px] left-0 right-0 m-auto"
+          className="w-[calc(100%-32px)] h-[56px]"
           onClick={playAnimation}
         >
           시작해보자냥
         </Button>
-        <div
-          className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
-          ref={scope}
-        >
-          <CatHand />
-        </div>
       </motion.div>
+      <div
+        className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
+        ref={scope}
+      >
+        <CatHand />
+      </div>
     </>
   );
 }
