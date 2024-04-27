@@ -29,7 +29,7 @@ export default function CheatLayout({ children }: CheatLayoutProps) {
   return (
     <>
       {createPortal(
-        <div className="absolute top-1 left-0 right-0 py-3 flex justify-cente w-fit mx-auto">
+        <div className="absolute top-1 right-5 py-3 flex w-fit">
           <MotionSettingButton />
         </div>,
         document.body
