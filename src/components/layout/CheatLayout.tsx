@@ -150,12 +150,14 @@ function SettingArea<T extends MotionJsonKeyType>({
         step={0.01}
         {...register(`${keyName}.delay`)}
       />
+      <SettingInput label="originX" {...register(`${keyName}.originX`)} />
+      <SettingInput label="originY" {...register(`${keyName}.originY`)} />
       <div className="border-sky-100 border-solid flex flex-col gap-2">
         {fields.map((item, idx) => {
           return (
             <div key={item.id} className="flex flex-row gap-2">
               <div className="flex flex-col">
-                {["x", "y", "rotate", "opacity", "ease"].map((key) => {
+                {["x", "y", "rotate", "opacity", "ease", "scale"].map((key) => {
                   const formName = `${keyName}.to[${idx}].${key}` as const;
                   return (
                     <SettingInput

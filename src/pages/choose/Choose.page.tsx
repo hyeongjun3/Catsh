@@ -18,6 +18,7 @@ export default function ChoosePage() {
       initial={{ y: "100%" }}
       animate={motionContent.to}
       transition={motionContent.options}
+      style={motionContent.styles}
     >
       <Top />
       <div className="flex flex-col px-[24px] overflow-y-auto gap-[32px]">

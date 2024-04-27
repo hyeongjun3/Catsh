@@ -35,6 +35,7 @@ export default function LandingPage() {
         className="flex flex-col h-full overflow-hidden absolute w-full"
         exit={motionContent.to}
         transition={motionContent.options}
+        style={motionContent.styles}
       >
         <div className="h-full relative px-[16px] flex w-full justify-between gap-[9px]">
           <MovieSide />
@@ -45,6 +46,7 @@ export default function LandingPage() {
       <motion.div
         exit={motionButton.to}
         transition={motionButton.options}
+        style={motionButton.styles}
         className="absolute flex w-full bottom-[32px] left-0 right-0 m-auto justify-center"
       >
         <Button
@@ -58,6 +60,7 @@ export default function LandingPage() {
       <div
         className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
         ref={scope}
+        style={motionCathand.styles}
       >
         <CatHand />
       </div>
