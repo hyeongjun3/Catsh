@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useMotion from "@Hooks/useMotion";
 import CatImage2 from "@Assets/images/cat2.png";
-import { TemplateType, getTemplate } from "@Utils/templateManager";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@Constant/queryKeys";
+import { TemplateType } from "@Utils/templateManager";
 import lodash from "lodash";
+import useLateTemplate from "@Hooks/useLateTemplate";
 
 export default function ChoosePage() {
   const motionContent = useMotion({ id: "choosepage-content" });
@@ -90,10 +89,7 @@ function Middle() {
 
 function Content() {
   const navigate = useNavigate();
-  const templateQuery = useQuery({
-    queryKey: [QUERY_KEYS.template],
-    queryFn: getTemplate,
-  });
+  const templateQuery = useLateTemplate();
 
   // HJ TODO: loading에 기능...
   if (templateQuery.status === "pending") {
