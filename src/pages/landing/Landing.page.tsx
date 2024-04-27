@@ -1,9 +1,11 @@
 import Button from "@Components/button/Button";
 import Base64 from "@Constant/base64";
-import { createRepeatBackground } from "@Utils/styleExtension";
+import { createRepeatBackground, mergeClassName } from "@Utils/styleExtension";
 import { motion, useAnimate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import CatHandImage from "@Assets/images/cat4.png";
+import CatImage1 from "@Assets/images/cat1.png";
+import CatImage3 from "@Assets/images/cat3.png";
 import { useState } from "react";
 import useMotion from "@Hooks/useMotion";
 
@@ -38,12 +40,6 @@ export default function LandingPage() {
           <MovieSide />
           <Center />
           <MovieSide />
-          <div
-            className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
-            ref={scope}
-          >
-            <CatHand />
-          </div>
         </div>
       </motion.div>
       <motion.div exit={motionButton.to} transition={motionButton.options}>
@@ -54,6 +50,12 @@ export default function LandingPage() {
         >
           시작해보자냥
         </Button>
+        <div
+          className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
+          ref={scope}
+        >
+          <CatHand />
+        </div>
       </motion.div>
     </>
   );
@@ -79,17 +81,18 @@ function MovieSide() {
 }
 function Center() {
   return (
-    <div className="w-full pt-[24px]">
-      <div className="flex gap-[24px] flex-col">
+    <div className="flex flex-col w-full max-w-[270px] px-[10px] translate-y-[-5%] mb-[50px]">
+      <div className="flex gap-[24px] flex-col flex-1">
         <CatBackground />
-        <CatBackground />
+        <CatBackground src={CatImage3} imgClassName="translate-y-[-19%]" />
+        <CatBackground src={CatImage1} imgClassName="translate-y-[-7%]" />
       </div>
-      <div className="flex mt-[60px] w-full flex-col justify-center">
+      <div className="flex w-full flex-col justify-center flex-1 gap-[16px]">
         <h1 className="flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[40px] font-bold gap-[8px]">
           <span>캣치</span>
           <span>catsch</span>
         </h1>
-        <p className="mt-[16px] flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[16px] font-regular gap-[8px]">
+        <p className="flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[16px] font-regular gap-[8px]">
           <span>우리집 고영희도 가능한</span>
           <span>초간단 숏츠 제작</span>
         </p>
@@ -98,10 +101,28 @@ function Center() {
   );
 }
 
-function CatBackground() {
+function CatBackground({
+  className,
+  src = "",
+  imgClassName,
+}: {
+  className?: string;
+  src?: string;
+  imgClassName?: string;
+}) {
   return (
-    <div className="w-full h-[200px] bg-slate-100 rounded-[4px]">
-      고양이 이미지 ㅜㅜ
+    <div
+      className={mergeClassName(
+        "w-full rounded-[4px] overflow-hidden",
+        className
+      )}
+      style={{
+        background:
+          "repeating-conic-gradient(#ffffff 0% 25%, #dadada 0% 50%) 50%/ 50px 50px",
+        aspectRatio: 226 / 150,
+      }}
+    >
+      <img src={src} className={imgClassName} />
     </div>
   );
 }
