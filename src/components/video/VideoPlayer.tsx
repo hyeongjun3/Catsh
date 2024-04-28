@@ -57,7 +57,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
           className={mergeClassName("w-full h-full", className)}
           src={src}
           muted={muted}
-          autoPlay={true}
+          autoPlay={autoPlay}
           onClick={toggleState}
           {...restProps}
         />
