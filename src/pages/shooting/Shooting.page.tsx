@@ -1,12 +1,15 @@
+import useLateTemplate from "@Hooks/useLateTemplate";
 import ShootingManager from "@Utils/shootingManager";
 import { mergeClassName } from "@Utils/styleExtension";
-import { ComponentProps, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ComponentProps, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ShootingPage() {
   const navigate = useNavigate();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const { templateId } = useParams();
+  const templateQuery = useLateTemplate();
+
   const [shootingManager] = useState(new ShootingManager());
 
   const goBack = () => navigate(-1);
@@ -16,20 +19,31 @@ export default function ShootingPage() {
   };
 
   useEffect(() => {
-    shootingManager.setUp(videoRef.current!);
-
     return () => {
       shootingManager.pause();
     };
   }, []);
 
+  if (templateQuery.status === "pending") return <div>loading</div>;
+  if (templateQuery.status === "error") return <div>error</div>;
+
+  const template = templateQuery.data.find(
+    (template) => template.id === templateId
+  );
+
+  if (!template || template.state !== "ready") return <div>error</div>;
+
   return (
     <div className="flex h-full flex-col justify-between">
-      <div className="flex bg-[#333] h-full relative">
-        <canvas ref={canvasRef} className="absolute" />
-        <video ref={videoRef} />
+      <div className="flex h-full relative">
+        <canvas
+          ref={(ref) => {
+            ref && shootingManager.setUp(ref);
+          }}
+          className="absolute w-full aspect-[9/16]"
+        />
         <button
-          className="absolute bottom-[42px] left-0 right-0 m-auto w-fit"
+          className="absolute bottom-[32px] left-0 right-0 m-auto w-fit z-10"
           onClick={start}
         >
           <IconStart />
@@ -41,28 +55,17 @@ export default function ShootingPage() {
           <IconBack />
           <p className="font-yClover text-white font-bold">뒤로가기</p>
         </div>
-        <div className="absolute top-[24px] right-[14px] flex flex-col justify-center gap-[16px]">
-          <IconButton className="bg-[rgba(255,255,255,0.25)]">
-            <IconSound />
-          </IconButton>
+        <div className="absolute top-[24px] right-[14px] flex flex-row justify-center gap-[16px]">
           <IconButton className="bg-[rgba(255,255,255,0.25)]">
             <IconStick />
           </IconButton>
-          <IconButton className="bg-[rgba(255,255,255,0.25)]">
+          <IconButton
+            className="bg-[rgba(255,255,255,0.25)]"
+            onClick={() => shootingManager.flipCamera()}
+          >
             <IconCamera />
           </IconButton>
         </div>
-      </div>
-      <div className="flex flex-row py-[20px] px-[24px] justify-between">
-        <IconButton className="bg-[#333]">
-          <IconImage />
-        </IconButton>
-        <IconButton className="bg-[#333]">
-          <div className="flex justify-center items-center font-yClover text-white font-normal">
-            재촬영
-          </div>
-          <IconRefresh />
-        </IconButton>
       </div>
     </div>
   );
