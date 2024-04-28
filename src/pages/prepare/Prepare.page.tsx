@@ -74,7 +74,7 @@ export default function PreparePage() {
           직접 촬영할래
         </Button>
         <Button className="w-full h-[56px] bg-[#9CA3AF]" variant={"primary"}>
-          업로르할래
+          업로드할래
         </Button>
       </div>
     </div>
