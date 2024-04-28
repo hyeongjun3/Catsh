@@ -1,4 +1,4 @@
-import { download } from "@Utils/download";
+import indexedDBManager from "@Utils/indexedDBManager";
 import ShootingManager from "@Utils/shootingManager";
 import { mergeClassName } from "@Utils/styleExtension";
 import { TemplateReadyType } from "@Utils/templateManager";
@@ -26,9 +26,10 @@ export default function ShootingSubPage({
       setStatus("camOn");
     } else if (status === "camOn") {
       setStatus("recording");
-      shootingManager.recording((blob) =>
-        download(`${template.title}.webm`, blob, "video/webm")
-      );
+      shootingManager.recording(async (blob) => {
+        await indexedDBManager.addRecordingObject({ id: template.id, blob });
+        navigate(`/confirm/${template.id}`);
+      });
       await shootingManager.shooting();
     }
   };
