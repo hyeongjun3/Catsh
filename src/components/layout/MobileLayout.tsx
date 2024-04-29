@@ -10,7 +10,7 @@ export default function MobileLayout() {
     <div className="w-screen bg-white h-dvh flex justify-center">
       <section
         id="mobile-layout"
-        className="w-[500px] relative h-full bg-[#1A1A1A] overflow-auto"
+        className="w-[500px] relative h-full bg-[#1A1A1A] overflow-hidden"
       >
         <AnimatePresence initial={false}>
           {outlet && cloneElement(outlet, { key: pathname })}
