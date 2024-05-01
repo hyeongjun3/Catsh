@@ -6,6 +6,7 @@ import {
   loadMedia,
 } from "@Utils/mediaExtension";
 import uaParserManager from "@Utils/uaParserManager";
+import { isDev } from "@Utils/envExtension";
 
 interface CanvasConfigure {
   width: number;
@@ -45,7 +46,7 @@ export default class ShootingManager {
 
     this.m_debugMode = true;
 
-    if (this.m_debugMode) {
+    if (this.m_debugMode && isDev()) {
       document.body.appendChild(this.m_videoEl);
       document.body.appendChild(this.m_recordVideoEl);
       this.m_recordVideoEl.controls = true;
