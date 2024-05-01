@@ -52,30 +52,32 @@ export default function PreparePage() {
               <IconSound />
             </button>
           </div>
-          <div className="flex flex-col gap-[8px]">
-            <p className="font-yClover font-bold text-[24px] text-white leading-[120%]">
-              {template.title}
-            </p>
-            <div className="flex flex-1 gap-[8px]">
-              <IconCat />
-              <p className="flex flex-col w-full gap-[8px] font-yClover font-normal text-[14px] leading-[140%] text-white whitespace-pre-line">
-                {template.description}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
-      <div className="absolute w-full bottom-[25px] flex flex-row items-center pt-[52px] pb-[40px] px-[16px] gap-[16px] justify-center">
-        <Button
-          className="w-full h-[56px]"
-          variant={"primary"}
-          onClick={goShooting}
-        >
-          직접 촬영할래
-        </Button>
-        <Button className="w-full h-[56px] bg-[#9CA3AF]" variant={"primary"}>
-          업로드할래
-        </Button>
+      <div className="absolute w-full bottom-[25px] flex flex-col pt-[16px] px-[16px] pb-[24px] gap-[32px]">
+        <div className="flex flex-col gap-[8px]">
+          <p className="font-yClover font-bold text-[24px] text-white leading-[120%]">
+            {template.title}
+          </p>
+          <div className="flex flex-1 gap-[8px]">
+            <IconCat />
+            <p className="flex flex-col w-full gap-[8px] font-yClover font-normal text-[14px] leading-[140%] text-white whitespace-pre-line">
+              {template.description}
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-[16px] justify-center">
+          <Button
+            className="w-full h-[56px]"
+            variant={"primary"}
+            onClick={goShooting}
+          >
+            직접 촬영할래
+          </Button>
+          <Button className="w-full h-[56px] bg-[#9CA3AF]" variant={"primary"}>
+            업로드할래
+          </Button>
+        </div>
       </div>
     </div>
   );

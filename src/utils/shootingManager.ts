@@ -1,6 +1,11 @@
 import { ERROR_MESSAGES } from "@Constant/errorMessages";
 import DeviceManager from "./deviceManager";
-import { createVideoElement, loadMedia } from "@Utils/mediaExtension";
+import {
+  createAudioElement,
+  createVideoElement,
+  loadMedia,
+} from "@Utils/mediaExtension";
+import uaParserManager from "@Utils/uaParserManager";
 
 interface CanvasConfigure {
   width: number;
@@ -13,6 +18,7 @@ export default class ShootingManager {
 
   private m_videoEl: HTMLVideoElement;
   private m_recordVideoEl: HTMLVideoElement;
+  private m_audioEl: HTMLAudioElement;
 
   private m_deviceManager: DeviceManager;
   private m_canvasConfigure: CanvasConfigure;
@@ -30,6 +36,7 @@ export default class ShootingManager {
     this.m_canvasConfigure = { width: 1080, height: 1920 };
     this.m_videoEl = createVideoElement();
     this.m_recordVideoEl = createVideoElement();
+    this.m_audioEl = createAudioElement();
 
     this.setCanvasConfigure(this.m_videoEl);
 
@@ -47,13 +54,20 @@ export default class ShootingManager {
 
   public setUp(
     canvasEl: HTMLCanvasElement,
-    recordVideoSrc: string,
+    recordVideoWebmSrc: string,
+    recordVideoMovSrc: string,
+    audioSrc: string,
     name: string
   ) {
     console.debug(CONSOLE_PREFIX, "setup");
     // HJ TODO: cleanup이 맞을까?
     this.setUpCanvas(canvasEl);
-    this.setUpVideo(recordVideoSrc);
+    this.setUpVideo(
+      uaParserManager.getOsName() === "iOS"
+        ? recordVideoMovSrc
+        : recordVideoWebmSrc
+    );
+    // this.setUpAudio(audioSrc);
     this.m_videoName = name;
   }
 
@@ -65,8 +79,6 @@ export default class ShootingManager {
 
     await loadMedia(this.m_videoEl, stream);
     this.m_videoEl.play();
-
-    this.m_context.drawImage(this.m_videoEl, 0, 0);
 
     this.m_drawCallbacks.push(this.drawCam.bind(this));
     this.draw();
@@ -80,6 +92,8 @@ export default class ShootingManager {
 
   public async pause() {
     this.m_videoEl.pause();
+    this.m_audioEl.pause();
+    this.m_recordVideoEl.pause();
     await this.m_deviceManager.pause();
     cancelAnimationFrame(this.m_animationFrameId);
   }
@@ -87,6 +101,7 @@ export default class ShootingManager {
   // related to shooting
   public async shooting() {
     await this.m_recordVideoEl.play();
+    // await this.m_audioEl.play();
     this.m_drawCallbacks.push(this.drawRecordVideo.bind(this));
   }
 
@@ -127,6 +142,10 @@ export default class ShootingManager {
 
   private async setUpVideo(src: string) {
     await this.setUpMedia(this.m_recordVideoEl, src);
+    console.debug(CONSOLE_PREFIX, `setUpVide : ${src}`);
+  }
+  private async setUpAudio(src: string) {
+    await this.setUpMedia(this.m_audioEl, src);
   }
 
   private async setUpMedia(
@@ -153,7 +172,10 @@ export default class ShootingManager {
 
   // the user interaction should be need to use audio context
   private setUpRecorder(onEnd: (blob: Blob) => void) {
-    const mimeType = "video/webm";
+    const mimeType =
+      uaParserManager.getOsName() === "iOS" ? "video/mp4" : "video/webm";
+
+    console.debug(CONSOLE_PREFIX, `mimeType : ${mimeType}`);
 
     const videoTrack = this.m_canvasEl.captureStream().getVideoTracks()[0];
 

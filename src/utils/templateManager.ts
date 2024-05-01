@@ -9,7 +9,8 @@ export type TemplateReadyType = {
   description: string;
   thumbnailSrc: string;
   previewVideoSrc: string;
-  recordVideoSrc: string;
+  recordVideoWebmSrc: string;
+  recordVideoMovSrc: string;
   state: "ready";
 };
 
@@ -31,14 +32,19 @@ export async function getTemplate() {
   const templateWithUrl = await Promise.all(
     templates.map(async (template) => {
       await Promise.all(
-        (["thumbnailSrc", "previewVideoSrc", "recordVideoSrc"] as const).map(
-          async (key) => {
-            if (hasOwn(template, key)) {
-              // @ts-ignore
-              template[key] = await firebaseManager.getUrl(template[key]);
-            }
+        (
+          [
+            "thumbnailSrc",
+            "previewVideoSrc",
+            "recordVideoWebmSrc",
+            "recordVideoMovSrc",
+          ] as (keyof TemplateReadyType)[]
+        ).map(async (key) => {
+          if (hasOwn(template, key)) {
+            // @ts-ignore
+            template[key] = await firebaseManager.getUrl(template[key]);
           }
-        )
+        })
       );
 
       return template;

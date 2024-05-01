@@ -2,7 +2,20 @@ import indexedDBManager from "@Utils/indexedDBManager";
 import ShootingManager from "@Utils/shootingManager";
 import { mergeClassName } from "@Utils/styleExtension";
 import { TemplateReadyType } from "@Utils/templateManager";
-import { ComponentProps, useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  AnimationScope,
+  motion,
+  useAnimate,
+} from "framer-motion";
+import {
+  ComponentProps,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
 // HJ TODO: loading state 제거 및 ref useEffect로 넣어서 cleanup 실행
@@ -25,12 +38,12 @@ export default function ShootingSubPage({
       shootingManager.turnOnCam();
       setStatus("camOn");
     } else if (status === "camOn") {
-      setStatus("recording");
       shootingManager.recording(async (blob) => {
         await indexedDBManager.addRecordingObject({ id: template.id, blob });
         navigate(`/confirm/${template.id}`);
       });
       await shootingManager.shooting();
+      setStatus("recording");
     }
   };
 
@@ -41,7 +54,13 @@ export default function ShootingSubPage({
   useEffect(() => {
     const canvasEl = canvasRef.current;
     if (!canvasEl) return;
-    shootingManager.setUp(canvasEl, template.recordVideoSrc, template.title);
+    shootingManager.setUp(
+      canvasEl,
+      template.recordVideoWebmSrc,
+      template.recordVideoMovSrc,
+      template.previewVideoSrc,
+      template.title
+    );
 
     return () => {
       shootingManager.pause();
@@ -51,12 +70,11 @@ export default function ShootingSubPage({
   return (
     <div className="flex h-full flex-col justify-between">
       <div className="flex h-full relative">
-        <canvas
-          // ref={(ref) => ref && setupRef(ref, template.recordVideoSrc)}
-          ref={canvasRef}
-          className="absolute w-full aspect-[9/16]"
-        />
+        <canvas ref={canvasRef} className="absolute w-full aspect-[9/16]" />
 
+        {/* <div className="absolute bottom-[32px] left-0 right-0 m-auto z-10 w-fit">
+          <RecordButton />
+        </div> */}
         <PlayButton
           className="absolute bottom-[32px] left-0 right-0 m-auto z-10"
           onClick={start}
@@ -185,3 +203,49 @@ function PlayButton({ children, className, ...restProps }: PlayButtonProps) {
     </button>
   );
 }
+
+const draw = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: (i) => {
+    const delay = 1 + i * 0.5;
+    return {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
+        opacity: { delay, duration: 0.01 },
+      },
+    };
+  },
+};
+
+const RecordButton = forwardRef<AnimationScope, {}>((_, ref) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      height="100"
+      viewBox="0 0 100 100"
+      fill="none"
+    >
+      <rect width="100" height="100" rx="50" fill="white" fillOpacity="0.5" />
+      <motion.circle
+        ref={ref}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 0.7 }}
+        transition={{ duration: 1 }}
+        custom={1}
+        cx={50}
+        cy={50}
+        r={46}
+        stroke="#FCD55F"
+        strokeWidth={8}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        className={"origin-center -rotate-90"}
+        // className={"rotate-90"}
+      />
+      <rect x="30" y="30" width="40" height="40" rx="8" fill="white" />
+    </svg>
+  );
+});
