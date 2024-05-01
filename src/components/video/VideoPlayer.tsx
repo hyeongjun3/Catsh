@@ -9,7 +9,14 @@ export interface VideoPlayerProps extends ComponentProps<"video"> {}
 // HJ TODO: default 값 더 좋게 넘길 수 있을 듯...
 const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
   (
-    { src = "", muted = true, autoPlay = true, className, ...restProps },
+    {
+      src = "",
+      muted = true,
+      autoPlay = true,
+      playsInline = false,
+      className,
+      ...restProps
+    },
     ref
   ) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -58,6 +65,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
           src={src}
           muted={muted}
           autoPlay={autoPlay}
+          playsInline={playsInline}
           onClick={toggleState}
           {...restProps}
         />

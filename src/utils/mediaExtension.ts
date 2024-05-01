@@ -20,6 +20,7 @@ export async function loadMedia(
 export function createVideoElement() {
   const videoEl = document.createElement("video");
   videoEl.crossOrigin = "anonymous";
+  videoEl.playsInline = false;
 
   return videoEl;
 }
