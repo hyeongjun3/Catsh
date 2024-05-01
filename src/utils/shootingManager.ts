@@ -64,9 +64,7 @@ export default class ShootingManager {
     // HJ TODO: cleanup이 맞을까?
     this.setUpCanvas(canvasEl);
     this.setUpVideo(
-      uaParserManager.getOsName() === "iOS"
-        ? recordVideoMovSrc
-        : recordVideoWebmSrc
+      uaParserManager.isApple() ? recordVideoMovSrc : recordVideoWebmSrc
     );
     // this.setUpAudio(audioSrc);
     this.m_videoName = name;
@@ -173,8 +171,7 @@ export default class ShootingManager {
 
   // the user interaction should be need to use audio context
   private setUpRecorder(onEnd: (blob: Blob) => void) {
-    const mimeType =
-      uaParserManager.getOsName() === "iOS" ? "video/mp4" : "video/webm";
+    const mimeType = uaParserManager.isApple() ? "video/mp4" : "video/webm";
 
     console.debug(CONSOLE_PREFIX, `mimeType : ${mimeType}`);
 

@@ -116,6 +116,12 @@ class UaParserManager {
     return this.m_device;
   }
 
+  public isApple() {
+    const osName = this.getOsName();
+
+    return (["Mac OS", "iOS"] as const).some(os => os === osName)
+  }
+
   public getOsName() {
     return this.getOs().name as OsType;
   }
@@ -123,6 +129,7 @@ class UaParserManager {
   private getOs() {
     if (!this.m_os) {
       this.m_os = this.m_parser.getOS();
+      console.debug(CONSOLE_PREFIX, "getOs", this.m_os);
     }
 
     return this.m_os;
