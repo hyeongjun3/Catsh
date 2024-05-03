@@ -1,0 +1,54 @@
+[
+  {
+    "id": "id-1",
+    "title": "타이틀",
+    "description": "템플릿 설명이 한 줄 정도 들어갈 것 같음 이런 영상이 필요해요! 이런 영상을 찍어요! 2줄정도가 적당",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "previewVideoSrc": "videos/record-video1.mp4",
+    "recordVideoWebmSrc": "videos/record-video1.webm",
+    "recordVideoMovSrc": "videos/record-video1.mov",
+    "state": "ready"
+  },
+  {
+    "id": "id-2",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-3",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-4",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-5",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-6",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-7",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  },
+  {
+    "id": "id-8",
+    "title": "타이틀",
+    "thumbnailSrc": "images/thumbnail-image1.png",
+    "state": "preparing"
+  }
+]
