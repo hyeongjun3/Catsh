@@ -7,6 +7,7 @@ export default {
     },
     fontFamily: {
       yClover: ['"Y Clover"'],
+      galmuri9: ['"Galmuri9"'],
     },
     backgroundColor: {
       test: "white",

@@ -153,3 +153,9 @@ button {
     url("@Assets/fonts/YClover-Bold.woff"),
     url("@Assets/fonts/YClover-Bold.woff2");
 }
+
+@font-face {
+  font-family: "Galmuri9";
+  font-weight: 400;
+  src: url("@Assets/fonts/Galmuri9.ttf");
+}

@@ -12,6 +12,7 @@ export default defineConfig({
       "@Constant": path.resolve(__dirname, "./src/constant"),
       "@Hooks": path.resolve(__dirname, "./src/hooks"),
       "@Pages": path.resolve(__dirname, "./src/pages"),
+      "@SubModules": path.resolve(__dirname, "./src/submodules"),
       "@Utils": path.resolve(__dirname, "./src/utils"),
     },
   },

@@ -11,6 +11,7 @@
       "@Constant/*": ["./src/constant/*"],
       "@Hooks/*": ["./src/hooks/*"],
       "@Pages/*": ["./src/pages/*"],
+      "@SubModules/*": ["./src/submodules/*"],
       "@Utils/*": ["./src/utils/*"]
     },
 
