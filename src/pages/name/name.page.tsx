@@ -2,9 +2,12 @@ import IconLeft from "@Assets/icons/icon-left.svg";
 import { useNavigate } from "react-router-dom";
 import SpeechBubble2 from "@Assets/images/speech-bubble2.png";
 import CatFull from "@Assets/images/cat-full.png";
+import { useState } from "react";
 
 interface NamePageProps {}
 export const NamePage = ({}: NamePageProps) => {
+  const [name, setName] = useState("");
+
   return (
     <div className={" w-full h-screen pt-[54px] flex flex-col items-center"}>
       <BackButton />
@@ -23,8 +26,10 @@ export const NamePage = ({}: NamePageProps) => {
 
       <div className="mt-[43px]">
         <input
-          className="w-[227px] font-galmuri9 text-[24px] font-bold placeholder:text-[#CED1D5]"
+          className="w-[227px] font-galmuri9 text-[24px] font-bold placeholder:text-[#CED1D5] text-[#3E2731] text-center"
           placeholder="이름을 입력해주세요"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="flex w-full justify-center items-end mt-auto mb-[48px]  ">

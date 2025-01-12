@@ -137,6 +137,10 @@ button {
   box-sizing: border-box;
 }
 
+input:focus {
+  outline: unset;
+}
+
 /* font family */
 @font-face {
   font-family: "Y Clover";
