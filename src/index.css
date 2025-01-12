@@ -159,3 +159,33 @@ button {
   font-weight: 400;
   src: url("@Assets/fonts/Galmuri9.ttf");
 }
+
+@font-face {
+  font-family: "Dogica Pixel";
+  font-weight: 400;
+  src: url("@Assets/fonts/dogicapixel.ttf");
+}
+
+@font-face {
+  font-family: "Dogica Pixel";
+  font-weight: 700;
+  src: url("@Assets/fonts/dogicapixelbold.ttf");
+}
+
+.ruler {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.ruler-horizon {
+  left: 0px;
+  width: 100%;
+  height: 30px;
+}
+
+.ruler-vertical {
+  top: 0px;
+  width: 30px;
+  height: 100%;
+}

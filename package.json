@@ -11,6 +11,7 @@
     "lint-ts": "tsc --noEmit"
   },
   "dependencies": {
+    "@scena/guides": "^0.29.2",
     "@tanstack/react-query": "^5.32.0",
     "@theatre/core": "^0.7.2",
     "@theatre/studio": "^0.7.2",

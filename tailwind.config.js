@@ -8,6 +8,7 @@ export default {
     fontFamily: {
       yClover: ['"Y Clover"'],
       galmuri9: ['"Galmuri9"'],
+      dogica: ['"Dogica Pixel"'],
     },
     backgroundColor: {
       test: "white",
