@@ -8,6 +8,7 @@ import CatImage1 from "@Assets/images/cat1.png";
 import CatImage3 from "@Assets/images/cat3.png";
 import { useState } from "react";
 import useMotion from "@Hooks/useMotion";
+import { twMerge } from "tailwind-merge";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -32,12 +33,18 @@ export default function LandingPage() {
   return (
     <>
       <motion.div
-        className="flex flex-col h-full overflow-hidden absolute w-full"
+        className={twMerge(
+          "flex flex-col h-full overflow-hidden absolute w-full"
+        )}
         exit={motionContent.to}
         transition={motionContent.options}
         style={motionContent.styles}
       >
-        <div className="h-full relative px-[16px] flex w-full justify-between gap-[9px]">
+        <div
+          className={twMerge(
+            "h-full relative px-[16px] flex w-full justify-between gap-[9px]"
+          )}
+        >
           <MovieSide />
           <Center />
           <MovieSide />
@@ -47,18 +54,22 @@ export default function LandingPage() {
         exit={motionButton.to}
         transition={motionButton.options}
         style={motionButton.styles}
-        className="absolute flex w-full bottom-[32px] left-0 right-0 m-auto justify-center"
+        className={twMerge(
+          "absolute flex w-full bottom-[32px] left-0 right-0 m-auto justify-center"
+        )}
       >
         <Button
           variant="primary"
-          className="w-[calc(100%-32px)] h-[56px]"
+          className={twMerge("w-[calc(100%-32px)] h-[56px]")}
           onClick={playAnimation}
         >
           시작해보자냥
         </Button>
       </motion.div>
       <div
-        className="absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
+        className={twMerge(
+          "absolute w-[100px] left-0 right-0 m-auto bottom-0 translate-y-full"
+        )}
         ref={scope}
         style={motionCathand.styles}
       >
@@ -71,7 +82,7 @@ export default function LandingPage() {
 function MovieSide() {
   return (
     <div
-      className="min-w-[32px] h-full"
+      className={twMerge("min-w-[32px] h-full")}
       style={{
         backgroundImage: createRepeatBackground(
           Base64.rectange,
@@ -88,18 +99,40 @@ function MovieSide() {
 }
 function Center() {
   return (
-    <div className="flex flex-col w-full max-w-[270px] px-[10px] translate-y-[-5%] mb-[50px]">
-      <div className="flex gap-[24px] flex-col flex-1">
+    <div
+      className={twMerge(
+        "flex flex-col w-full max-w-[270px] px-[10px] translate-y-[-5%] mb-[50px]"
+      )}
+    >
+      <div className={twMerge("flex gap-[24px] flex-col flex-1")}>
         <CatBackground />
-        <CatBackground src={CatImage3} imgClassName="translate-y-[-19%]" />
-        <CatBackground src={CatImage1} imgClassName="translate-y-[-7%]" />
+        <CatBackground
+          src={CatImage3}
+          className={twMerge("translate-y-[-19%]")}
+        />
+        <CatBackground
+          src={CatImage1}
+          className={twMerge("translate-y-[-7%]")}
+        />
       </div>
-      <div className="flex w-full flex-col justify-center flex-1 gap-[16px]">
-        <h1 className="flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[40px] font-bold gap-[8px]">
+      <div
+        className={twMerge(
+          "flex w-full flex-col justify-center flex-1 gap-[16px]"
+        )}
+      >
+        <h1
+          className={twMerge(
+            "flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[40px] font-bold gap-[8px]"
+          )}
+        >
           <span>캣치</span>
           <span>catsch</span>
         </h1>
-        <p className="flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[16px] font-regular gap-[8px]">
+        <p
+          className={twMerge(
+            "flex flex-col justify-center text-center text-[#FCD55F] font-yClover text-[16px] font-regular gap-[8px]"
+          )}
+        >
           <span>우리집 고영희도 가능한</span>
           <span>초간단 숏츠 제작</span>
         </p>

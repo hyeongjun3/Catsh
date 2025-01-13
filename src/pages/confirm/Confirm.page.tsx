@@ -26,34 +26,46 @@ export default function ConfirmPage() {
   const goNext = () => navigate(`/result`);
 
   return (
-    <div className="w-full h-full flex  flex-col  justify-between">
-      <div className="relative w-full overflow-hidden max-h-full">
+    <div className={twMerge("w-full h-full flex  flex-col  justify-between")}>
+      <div className={twMerge("relative w-full overflow-hidden max-h-full")}>
         <VideoPlayer src={objectUrl} muted={false} autoPlay={false} />
 
-        <div className="absolute top-0 flex flex-col w-full h-full py-[24px] px-[16px] justify-between pointer-events-none">
-          <div className="flex flex-row justify-between">
+        <div
+          className={twMerge(
+            "absolute top-0 flex flex-col w-full h-full py-[24px] px-[16px] justify-between pointer-events-none"
+          )}
+        >
+          <div className={twMerge("flex flex-row justify-between")}>
             <button
-              className="flex flex-row items-center gap-[8px] pointer-events-auto"
+              className={twMerge(
+                "flex flex-row items-center gap-[8px] pointer-events-auto"
+              )}
               onClick={goBack}
             >
               <div>
                 <BackIcon />
               </div>
-              <div className="font-yClover text-white font-bold">뒤로가기</div>
+              <div className={twMerge("font-yClover text-white font-bold")}>
+                뒤로가기
+              </div>
             </button>
           </div>
         </div>
       </div>
-      <div className="absolute w-full bottom-[25px] flex flex-row items-center pt-[52px] pb-[40px] px-[16px] gap-[16px] justify-center">
+      <div
+        className={twMerge(
+          "absolute w-full bottom-[25px] flex flex-row items-center pt-[52px] pb-[40px] px-[16px] gap-[16px] justify-center"
+        )}
+      >
         <Button
-          className="w-full h-[56px]"
+          className={twMerge("w-full h-[56px]")}
           variant={"primary"}
           onClick={goBack}
         >
           재촬영
         </Button>
         <Button
-          className="w-full h-[56px] bg-[#9CA3AF]"
+          className={twMerge("w-full h-[56px] bg-[#9CA3AF]")}
           variant={"primary"}
           onClick={goNext}
         >

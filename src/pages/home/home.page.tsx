@@ -4,11 +4,12 @@ import mobileHomeScreen from "@Assets/images/mobileHomeScreen.png";
 import mobileCat from "@Assets/images/mobileCat.png";
 import speechBubble1 from "@Assets/images/speech-bubble1.png";
 import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 export default function HomePage() {
   return (
     <div
-      className={` w-full h-full flex flex-col `}
+      className={twMerge("w-full h-full flex flex-col")}
       style={{ backgroundImage: `url("${background}")` }}
     >
       <MobilePhone />
@@ -21,19 +22,31 @@ export default function HomePage() {
 //#region sub components
 function MobilePhone() {
   return (
-    <div className="absolute top-0 bottom-0 left-0 right-0 m-auto w-[320px] h-[604px]">
-      <div className="absolute top-[45px] left-0 right-0 m-auto w-[265px] h-[522px] overflow-hidden">
+    <div
+      className={twMerge(
+        "absolute top-0 bottom-0 left-0 right-0 m-auto w-[320px] h-[604px]"
+      )}
+    >
+      <div
+        className={twMerge(
+          "absolute top-[45px] left-0 right-0 m-auto w-[265px] h-[522px] overflow-hidden"
+        )}
+      >
         <img
-          className="h-full object-cover absolute top-0 bottom-0 m-auto"
+          className={twMerge(
+            "h-full object-cover absolute top-0 bottom-0 m-auto"
+          )}
           src={mobileHomeScreen}
         />
         <img
-          className="w-[200px] object-cover absolute bottom-0 left-0 right-0 m-auto"
+          className={twMerge(
+            "w-[200px] object-cover absolute bottom-0 left-0 right-0 m-auto"
+          )}
           src={mobileCat}
         />
       </div>
       <div
-        className=" w-full h-full absolute"
+        className={twMerge(" w-full h-full absolute")}
         style={{
           backgroundImage: `url("${mobileFrame}")`,
         }}
@@ -44,9 +57,15 @@ function MobilePhone() {
 
 function Title() {
   return (
-    <div className="absolute top-0 bottom-0 left-0 right-0 m-auto w-full h-[604px]">
+    <div
+      className={twMerge(
+        "absolute top-0 bottom-0 left-0 right-0 m-auto w-full h-[604px]"
+      )}
+    >
       <span
-        className="absolute top-[100px] left-0 right-0 m-auto font-dogica font-bold text-[66.667px] text-center"
+        className={twMerge(
+          "absolute top-[100px] left-0 right-0 m-auto font-dogica font-bold text-[66.667px] text-center"
+        )}
         style={{
           WebkitTextStrokeWidth: 3,
           WebkitTextStrokeColor: "#FFF",
@@ -56,10 +75,16 @@ function Title() {
         CATSCH
       </span>
       <div
-        className="absolute top-[180px] left-0 right-0 m-auto w-[226px] h-[100px] flex justify-center items-center"
+        className={twMerge(
+          "absolute top-[180px] left-0 right-0 m-auto w-[226px] h-[100px] flex justify-center items-center"
+        )}
         style={{ backgroundImage: `url("${speechBubble1}")` }}
       >
-        <span className="absolute top-[21px] font-galmuri9 font-bold text-[14px] leading-normal">
+        <span
+          className={twMerge(
+            "absolute top-[21px] font-galmuri9 font-bold text-[14px] leading-normal"
+          )}
+        >
           우리집 고양이가
           <br />
           인플루언서가 되
@@ -73,9 +98,15 @@ function Button() {
   const navigate = useNavigate();
 
   return (
-    <div className="absolute bottom-[35px] left-0 right-0 m-auto flex items-center justify-center">
+    <div
+      className={twMerge(
+        "absolute bottom-[35px] left-0 right-0 m-auto flex items-center justify-center"
+      )}
+    >
       <button
-        className=" h-[64px] w-[240px] font-dogica font-normal leading-normal text-[32px] bg-[#3E2731] text-white letter tracking-[-4.8px]"
+        className={twMerge(
+          " h-[64px] w-[240px] font-dogica font-normal leading-normal text-[32px] bg-[#3E2731] text-white letter tracking-[-4.8px]"
+        )}
         onClick={() => {
           navigate("/name");
         }}

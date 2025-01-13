@@ -7,10 +7,10 @@ export default function MobileLayout() {
   const outlet = useOutlet();
 
   return (
-    <div className="w-screen bg-[##FFF] h-dvh flex justify-center">
+    <div className={twMerge("w-screen bg-[##FFF] h-dvh flex justify-center")}>
       <section
         id="mobile-layout"
-        className="w-[375px] relative h-full overflow-hidden"
+        className={twMerge("w-[375px] relative h-full overflow-hidden")}
       >
         <AnimatePresence initial={false}>
           {outlet && cloneElement(outlet, { key: pathname })}

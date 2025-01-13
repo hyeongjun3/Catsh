@@ -6,6 +6,7 @@ import useLateTemplate from "@Hooks/useLateTemplate";
 import useVideo from "@Hooks/useVideo";
 import { mergeClassName } from "@Utils/styleExtension";
 import { useNavigate, useParams } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 export default function PreparePage() {
   const navigate = useNavigate();
@@ -28,20 +29,28 @@ export default function PreparePage() {
   const goShooting = () => navigate(`/shooting/${templateId}`);
 
   return (
-    <div className="w-full h-full flex  flex-col  justify-between">
-      <div className="relative w-full overflow-hidden max-h-full">
+    <div className={twMerge("w-full h-full flex  flex-col  justify-between")}>
+      <div className={twMerge("relative w-full overflow-hidden max-h-full")}>
         <VideoPlayer src={template.previewVideoSrc} muted={isMuted} />
 
-        <div className="absolute top-0 flex flex-col w-full h-full py-[24px] px-[16px] justify-between pointer-events-none">
-          <div className="flex flex-row justify-between">
+        <div
+          className={twMerge(
+            "absolute top-0 flex flex-col w-full h-full py-[24px] px-[16px] justify-between pointer-events-none"
+          )}
+        >
+          <div className={twMerge("flex flex-row justify-between")}>
             <button
-              className="flex flex-row items-center gap-[8px] pointer-events-auto"
+              className={twMerge(
+                "flex flex-row items-center gap-[8px] pointer-events-auto"
+              )}
               onClick={goBack}
             >
               <div>
                 <BackIcon />
               </div>
-              <div className="font-yClover text-white font-bold">뒤로가기</div>
+              <div className={twMerge("font-yClover text-white font-bold")}>
+                뒤로가기
+              </div>
             </button>
             <button
               className={mergeClassName(
@@ -54,27 +63,46 @@ export default function PreparePage() {
           </div>
         </div>
       </div>
-      <div className="absolute w-full bottom-[25px] flex flex-col pt-[16px] px-[16px] pb-[24px] gap-[32px]">
-        <div className="flex flex-col gap-[8px]">
-          <p className="font-yClover font-bold text-[24px] text-white leading-[120%]">
+      <div
+        className={twMerge(
+          "absolute w-full bottom-[25px] flex flex-col pt-[16px] px-[16px] pb-[24px] gap-[32px]"
+        )}
+      >
+        <div className={twMerge("flex flex-col gap-[8px]")}>
+          <p
+            className={twMerge(
+              "font-yClover font-bold text-[24px] text-white leading-[120%]"
+            )}
+          >
             {template.title}
           </p>
-          <div className="flex flex-1 gap-[8px]">
+          <div className={twMerge("flex flex-1 gap-[8px]")}>
             <IconCat />
-            <p className="flex flex-col w-full gap-[8px] font-yClover font-normal text-[14px] leading-[140%] text-white whitespace-pre-line">
+            <p
+              className={twMerge(
+                "flex flex-col w-full gap-[8px] font-yClover font-normal text-[14px] leading-[140%] text-white whitespace-pre-line"
+              )}
+            >
               {template.description}
             </p>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-[16px] justify-center">
+        <div
+          className={twMerge(
+            "flex flex-row items-center gap-[16px] justify-center"
+          )}
+        >
           <Button
-            className="w-full h-[56px]"
+            className={twMerge("w-full h-[56px]")}
             variant={"primary"}
             onClick={goShooting}
           >
             직접 촬영할래
           </Button>
-          <Button className="w-full h-[56px] bg-[#9CA3AF]" variant={"primary"}>
+          <Button
+            className={twMerge("w-full h-[56px] bg-[#9CA3AF]")}
+            variant={"primary"}
+          >
             업로드할래
           </Button>
         </div>

@@ -3,7 +3,7 @@ import { LandingPhone } from "@Pages/landing/Landing.phone";
 
 export default function LandingPage() {
   return (
-    <div className="relative w-full h-screen">
+    <div className={twMerge("relative w-full h-screen")}>
       <LandingPhone />
       <LandingCat />
     </div>
