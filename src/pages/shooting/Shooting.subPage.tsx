@@ -2,21 +2,10 @@ import indexedDBManager from "@Utils/indexedDBManager";
 import ShootingManager from "@Utils/shootingManager";
 import { mergeClassName } from "@Utils/styleExtension";
 import { TemplateReadyType } from "@Utils/templateManager";
-import {
-  AnimatePresence,
-  AnimationScope,
-  motion,
-  useAnimate,
-} from "framer-motion";
-import {
-  ComponentProps,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
+import { AnimationScope, motion } from "framer-motion";
+import { ComponentProps, forwardRef, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 // HJ TODO: loading state 제거 및 ref useEffect로 넣어서 cleanup 실행
 
@@ -68,33 +57,46 @@ export default function ShootingSubPage({
   }, []);
 
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex h-full relative">
-        <canvas ref={canvasRef} className="absolute w-full aspect-[9/16]" />
+    <div className={twMerge("flex h-full flex-col justify-between")}>
+      <div className={twMerge("flex h-full relative")}>
+        <canvas
+          ref={canvasRef}
+          className={twMerge("absolute w-full aspect-[9/16]")}
+        />
 
-        {/* <div className="absolute bottom-[32px] left-0 right-0 m-auto z-10 w-fit">
+        {/* <div className={twMerge("absolute bottom-[32px] left-0 right-0 m-auto z-10 w-fit")}>
           <RecordButton />
         </div> */}
         <PlayButton
-          className="absolute bottom-[32px] left-0 right-0 m-auto z-10"
+          className={twMerge(
+            "absolute bottom-[32px] left-0 right-0 m-auto z-10"
+          )}
           onClick={start}
         >
           {status === "idle" ? "시작" : "촬영"}
         </PlayButton>
 
         <div
-          className="absolute top-[24px] left-[14px] flex flex-row items-center gap-[8px]"
+          className={twMerge(
+            "absolute top-[24px] left-[14px] flex flex-row items-center gap-[8px]"
+          )}
           onClick={goBack}
         >
           <IconBack />
-          <p className="font-yClover text-white font-bold">뒤로가기</p>
+          <p className={twMerge("font-yClover text-white font-bold")}>
+            뒤로가기
+          </p>
         </div>
-        <div className="absolute top-[24px] right-[14px] flex flex-row justify-center gap-[16px]">
-          <IconButton className="bg-[rgba(255,255,255,0.25)]">
+        <div
+          className={twMerge(
+            "absolute top-[24px] right-[14px] flex flex-row justify-center gap-[16px]"
+          )}
+        >
+          <IconButton className={twMerge("bg-[rgba(255,255,255,0.25)]")}>
             <IconStick />
           </IconButton>
           <IconButton
-            className="bg-[rgba(255,255,255,0.25)]"
+            className={twMerge("bg-[rgba(255,255,255,0.25)]")}
             onClick={flipCamera}
           >
             <IconCamera />
@@ -195,8 +197,16 @@ function PlayButton({ children, className, ...restProps }: PlayButtonProps) {
       )}
       {...restProps}
     >
-      <div className="w-[72px] aspect-square rounded-full bg-[#000] flex items-center justify-center">
-        <div className="w-[64px] aspect-square rounded-full bg-[#FBD650] flex items-center justify-center font-yClover text-[16px] font-bold text-[#030712]">
+      <div
+        className={twMerge(
+          "w-[72px] aspect-square rounded-full bg-[#000] flex items-center justify-center"
+        )}
+      >
+        <div
+          className={twMerge(
+            "w-[64px] aspect-square rounded-full bg-[#FBD650] flex items-center justify-center font-yClover text-[16px] font-bold text-[#030712]"
+          )}
+        >
           {children}
         </div>
       </div>

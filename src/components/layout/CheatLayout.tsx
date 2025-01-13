@@ -20,6 +20,7 @@ import { STORAGE_KEYS } from "@Constant/storageKeys";
 import MotionJson from "@Assets/motion/motion.json";
 import { download } from "@Utils/download";
 import getCurrentDate from "@Utils/dateExtension";
+import { twMerge } from "tailwind-merge";
 
 interface CheatLayoutProps {
   children: ReactNode;
@@ -29,7 +30,7 @@ export default function CheatLayout({ children }: CheatLayoutProps) {
   return (
     <>
       {createPortal(
-        <div className="absolute top-1 right-5 py-3 flex w-fit">
+        <div className={twMerge("absolute top-1 right-5 py-3 flex w-fit")}>
           <MotionSettingButton />
         </div>,
         document.body
@@ -76,10 +77,18 @@ function MotionSettingModal({ isOpen, onClose }: MotionSettingModalProps) {
     <>
       {createPortal(
         <FormProvider {...form}>
-          <div className="absolute bg-[rgb(209,213,219)] top-1 flex w-[calc(100%-16px)] left-0 right-0 m-auto py-4 px-2 rounded-lg flex-col gap-2 z-10">
-            <div className="flex justify-between w-full items-center">
-              <p className="font-yClover text-base font-bold">모션 설정</p>
-              <div className="flex gap-2">
+          <div
+            className={twMerge(
+              "absolute bg-[rgb(209,213,219)] top-1 flex w-[calc(100%-16px)] left-0 right-0 m-auto py-4 px-2 rounded-lg flex-col gap-2 z-10"
+            )}
+          >
+            <div
+              className={twMerge("flex justify-between w-full items-center")}
+            >
+              <p className={twMerge("font-yClover text-base font-bold")}>
+                모션 설정
+              </p>
+              <div className={twMerge("flex gap-2")}>
                 <Button variant={"primary"} onClick={form.handleSubmit(store)}>
                   저장
                 </Button>
@@ -97,7 +106,9 @@ function MotionSettingModal({ isOpen, onClose }: MotionSettingModalProps) {
                 </Button>
               </div>
             </div>
-            <form className="flex flex-col h-[500px] overflow-auto gap-1">
+            <form
+              className={twMerge("flex flex-col h-[500px] overflow-auto gap-1")}
+            >
               {Object.entries(motionJson).map(([key, value]) => {
                 return (
                   <SettingArea
@@ -129,9 +140,15 @@ function SettingArea<T extends MotionJsonKeyType>({
   });
 
   return (
-    <div className="flex flex-col gap-2 rounded-sm border border-sky-100 border-solid py-2 px-1">
-      <div className="flex flex-row items-center w-full gap-4">
-        <p className="font-yClover font-normal text-[14px] w-[180px]">
+    <div
+      className={twMerge(
+        "flex flex-col gap-2 rounded-sm border border-sky-100 border-solid py-2 px-1"
+      )}
+    >
+      <div className={twMerge("flex flex-row items-center w-full gap-4")}>
+        <p
+          className={twMerge("font-yClover font-normal text-[14px] w-[180px]")}
+        >
           {keyName}
         </p>
         <Button variant={"primary"} onClick={() => append({})}>
@@ -152,11 +169,13 @@ function SettingArea<T extends MotionJsonKeyType>({
       />
       <SettingInput label="originX" {...register(`${keyName}.originX`)} />
       <SettingInput label="originY" {...register(`${keyName}.originY`)} />
-      <div className="border-sky-100 border-solid flex flex-col gap-2">
+      <div
+        className={twMerge("border-sky-100 border-solid flex flex-col gap-2")}
+      >
         {fields.map((item, idx) => {
           return (
-            <div key={item.id} className="flex flex-row gap-2">
-              <div className="flex flex-col">
+            <div key={item.id} className={twMerge("flex flex-row gap-2")}>
+              <div className={twMerge("flex flex-col")}>
                 {["x", "y", "rotate", "opacity", "ease", "scale"].map((key) => {
                   const formName = `${keyName}.to[${idx}].${key}` as const;
                   return (
@@ -186,9 +205,14 @@ interface SettingInputProps extends ComponentProps<"input"> {
 const SettingInput = forwardRef<HTMLInputElement, SettingInputProps>(
   ({ label, ...props }, ref) => {
     return (
-      <div className="flex gap-2 items-center">
-        <label className="w-[80px] font-yClover">{label}</label>
-        <input ref={ref} className="p-1" placeholder="입력" {...props} />
+      <div className={twMerge("flex gap-2 items-center")}>
+        <label className={twMerge("w-[80px] font-yClover")}>{label}</label>
+        <input
+          ref={ref}
+          className={twMerge("p-1")}
+          placeholder="입력"
+          {...props}
+        />
       </div>
     );
   }

@@ -14,14 +14,18 @@ export default function ChoosePage() {
 
   return (
     <motion.div
-      className="flex flex-col w-full h-full absolute"
+      className={twMerge("flex flex-col w-full h-full absolute")}
       initial={{ y: "100%" }}
       animate={motionContent.to}
       transition={motionContent.options}
       style={motionContent.styles}
     >
       <Top />
-      <div className="flex flex-col px-[24px] overflow-y-auto gap-[32px]">
+      <div
+        className={twMerge(
+          "flex flex-col px-[24px] overflow-y-auto gap-[32px]"
+        )}
+      >
         <Middle />
         <Content />
       </div>
@@ -31,9 +35,9 @@ export default function ChoosePage() {
 
 function Top() {
   return (
-    <div className=" pt-[24px] pb-[8px] pr-[16px] flex gap-[26px]">
+    <div className={twMerge(" pt-[24px] pb-[8px] pr-[16px] flex gap-[26px]")}>
       <div
-        className="w-full"
+        className={twMerge("w-full")}
         style={{
           backgroundImage: createRepeatBackground(
             Base64.rectange,
@@ -48,7 +52,7 @@ function Top() {
           transform: "scale(-1,-1)",
         }}
       />
-      <button className="min-w-[16px]">
+      <button className={twMerge("min-w-[16px]")}>
         <IconMenu />
       </button>
     </div>
@@ -76,13 +80,21 @@ function IconMenu() {
 
 function Middle() {
   return (
-    <div className="mt-[16px] flex flex-row gap-[24px]">
-      <div className="w-[80px] h-[80px] rounded-full bg-[#DAD9D9] overflow-hidden">
-        <img src={CatImage2} className="scale-[1.3]" />
+    <div className={twMerge("mt-[16px] flex flex-row gap-[24px]")}>
+      <div
+        className={twMerge(
+          "w-[80px] h-[80px] rounded-full bg-[#DAD9D9] overflow-hidden"
+        )}
+      >
+        <img src={CatImage2} className={twMerge("scale-[1.3]")} />
       </div>
-      <div className="flex flex-col justify-center gap-[8px] font-yClover font-bold text-[#FCD55F]">
-        <span className="text-[24px]">@ catsch</span>
-        <span className="text-[16px]">너도 찍어볼래냥?</span>
+      <div
+        className={twMerge(
+          "flex flex-col justify-center gap-[8px] font-yClover font-bold text-[#FCD55F]"
+        )}
+      >
+        <span className={twMerge("text-[24px]")}>@ catsch</span>
+        <span className={twMerge("text-[16px]")}>너도 찍어볼래냥?</span>
       </div>
     </div>
   );
@@ -113,7 +125,7 @@ function Content() {
   };
 
   return (
-    <div className="flex flex-row gap-[8px]">
+    <div className={twMerge("flex flex-row gap-[8px]")}>
       {separatedTemplates.map((templates, idx) => {
         const margin = idx === 1 ? "mt-[88px]" : "";
         return (

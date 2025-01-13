@@ -3,6 +3,7 @@ import { shareRef } from "@Utils/reactExtension";
 import { mergeClassName } from "@Utils/styleExtension";
 import { AnimatePresence, motion } from "framer-motion";
 import { ComponentProps, forwardRef, useEffect, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export interface VideoPlayerProps extends ComponentProps<"video"> {}
 
@@ -58,7 +59,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
     }, []);
 
     return (
-      <div className="relative w-full aspect-[9/16]">
+      <div className={twMerge("relative w-full aspect-[9/16]")}>
         <video
           ref={shareRef(videoRef, ref)}
           className={mergeClassName("w-full h-full", className)}
@@ -70,7 +71,11 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
           {...restProps}
         />
 
-        <div className="absolute top-0 bottom-0 left-0 right-0 m-auto w-fit h-fit">
+        <div
+          className={twMerge(
+            "absolute top-0 bottom-0 left-0 right-0 m-auto w-fit h-fit"
+          )}
+        >
           <AnimatePresence>
             {isVisible && (
               <motion.div
@@ -93,16 +98,28 @@ VideoPlayer.displayName = "VideoPlayer";
 
 function PauseButton() {
   return (
-    <button className="flex items-center justify-center w-[100px] h-[100px] bg-[#FFFFFF40] rounded-full gap-[8px]">
-      <div className="w-[16px] h-[40px] rounded-[6px] bg-[#FFFFFF]" />
-      <div className="w-[16px] h-[40px] rounded-[6px] bg-[#FFFFFF]" />
+    <button
+      className={twMerge(
+        "flex items-center justify-center w-[100px] h-[100px] bg-[#FFFFFF40] rounded-full gap-[8px]"
+      )}
+    >
+      <div
+        className={twMerge("w-[16px] h-[40px] rounded-[6px] bg-[#FFFFFF]")}
+      />
+      <div
+        className={twMerge("w-[16px] h-[40px] rounded-[6px] bg-[#FFFFFF]")}
+      />
     </button>
   );
 }
 
 function StartButton() {
   return (
-    <button className="flex items-center justify-center w-[100px] h-[100px] bg-[#FFFFFF40] rounded-full gap-[8px]">
+    <button
+      className={twMerge(
+        "flex items-center justify-center w-[100px] h-[100px] bg-[#FFFFFF40] rounded-full gap-[8px]"
+      )}
+    >
       <IconPlay />
     </button>
   );

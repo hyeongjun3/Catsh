@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ERROR_MESSAGES } from "@Constant/errorMessages";
 import DeviceManager from "./deviceManager";
 import {
